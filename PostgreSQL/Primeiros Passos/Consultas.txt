@@ -1,0 +1,143 @@
+
+
+DROP TABLE funcionarios
+CREATE TABLE funcionarios(
+    id SERIAL PRIMARY KEY,
+    matricula VARCHAR(10),
+    nome VARCHAR(255),
+    sobrenome VARCHAR(255)
+);
+
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M001', 'Diogo', 'Mascarenhas');
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M002', 'Vinícius', 'Dias');
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M003', 'Nico', 'Steppat');
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M004', 'João', 'Roberto');
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M005', 'Diogo', 'Mascarenhas');
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M006', 'Alberto', 'Martins');
+
+INSERT INTO funcionarios (matricula, nome, sobrenome) VALUES ('M007', 'Diogo', 'Oliveira');
+
+(organiza pelos nomes em ordem alfabética, crescente)
+SELECT * 
+    FROM funcionarios
+    ORDER BY nome;
+
+(organização em ordem decrescente)
+SELECT * 
+    FROM funcionarios
+    ORDER BY nome desc;
+
+SELECT * 
+    FROM funcionarios
+    ORDER BY nome, matricula;
+
+(Outra forma de realizar a ordenação é declarando a posição do campo, ou seja, a coluna que ele ocupa, ao invés do seu nome.
+Na nossa tabela, o "id" ocupa a primeira posição, "matrícula" a segunda e assim sucessivamente.)
+
+SELECT *
+    FROM funcionarios
+    ORDER BY 3, 4, 2
+
+============limitar a quantidade de resultados ao realizarmos uma consulta=================
+
+(Para retornarmos os resultados de forma ordenada, utilizamos o ORDER BY antes do LIMIT)
+
+
+SELECT *
+  FROM funcionarios
+  ORDER BY nome
+LIMIT 5;
+
+(OFFSET Essa cláusula pula a quantidade de linhas que estipularmos antes de exibir a busca)
+
+SELECT *
+  FROM funcionarios
+  ORDER BY id
+ LIMIT 5
+OFFSET 1;
+
+
+=========funções de agregação===========
+
+
+-- COUNT - Retorna a quantidade de registros
+-- SUM -   Retorna a soma dos registros
+-- MAX -   Retorna o maior valor dos registros
+-- MIN -   Retorna o menor valor dos registros
+-- AVG -   Retorna a média dos registros
+
+(Para reduzir a quantidade de casas decimais, codamos ROUND() . Esse comando arredonda o resultado entre parênteses, diminuindo as casas decimais para um valor declarado.
+Por exemplo, para termos apenas duas casas decimais na nossa média, podemos escrever ROUND(AVG(id), 2))
+
+
+SELECT * FROM funcionarios
+
+
+SELECT COUNT (id),
+       SUM(id),
+       MAX(id),
+       MIN(id),
+       ROUND(AVG(id),0)
+  FROM funcionarios;
+
+
+
+
+=========Agrupando consultas===========
+
+(aprenderemos como listar os nomes sem haver repetição.)
+
+SELECT * FROM funcionarios;
+
+(O DISTINCT garante que os dados do campo solicitado não se repitam, a partir do agrupamento de informações.)
+SELECT DISTINCT
+        nome
+  FROM funcionarios
+  ORDER BY nome;
+
+ELECT DISTINCT
+        nome,
+        sobrenome
+  FROM funcionarios
+  ORDER BY nome;
+
+(O comando GROUP BY é um agrupamento para realização de buscas com funções de agregação.
+Em outras palavras, se o agrupamento da busca não precisar de agregação, realizamos com DISTINCT , do contrário, codaremos com GROUP BY)
+
+SELECT
+       nome,
+       sobrenome,
+       COUNT(*)
+  FROM funcionarios
+  GROUP BY nome, sobrenome
+  ORDER BY nome;
+
+
+SELECT curso.nome
+        COUNT(aluno.id)
+    FROM aluno
+    JOIN aluno_curso ON aluno.id = aluno_curso.aluno_id
+    JOIN curso ON curso.id = aluno_curso.curso_id
+    GROUP BY 1
+    ORDER BY 1
+
+===================iltrar consultas agrupadas============
+
+(HAVING , que é um comando de filtro assim como o WHERE .
+A diferença da filtragem com HAVING é a possibilidade de utilizar as funções de agrupamento , enquanto o WHERE filtra a partir dos campos.)
+
+SELECT *
+    FROM curso
+    LEFT JOIN aluno_curso ON aluno.curso_id = curso.id
+    LEFT JOIN aluno ON aluno.id = aluno_curso.aluno_id
+    --WHERE COUNT(aluno.id) = 0
+GROUP BY 1
+    HAVING COUNT (aluno.id) = 0
+
+
+SELECT nome,
+       COUNT(id)
+    FROM funcionarios
+    GROUP BY nome
+    HAVING COUNT(id) > 1;
+

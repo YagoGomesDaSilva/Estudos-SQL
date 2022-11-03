@@ -1,0 +1,53 @@
+=========================================TERMOS=========================================
+Query
+Uma query é um pedido de uma informação ou de um dado. Esse pedido também pode ser entendido como uma consulta, uma solicitação ou, ainda, uma requisição.
+
+Join
+Uma cláusula join da SQL - correspondente a uma operação de junção em álgebra relacional/combina colunas de uma ou mais tabelas em um banco de dados relacional.
+Ela cria um conjunto que pode ser salvo como uma tabela ou usado da forma como está.
+
+
+
+=========================================CAMPOS NUMERICOS=========================================
+
+integer
+se refere a dados que são números inteiros entre -2147483648 e +2147483647. 
+
+real
+dados numéricos com casas decimais de até seis dígitos, e colamos na linha abaixo do integer.
+
+serial
+números inteiros positivos com incremento automático, ou seja,
+não precisamos colocar o valor dele, pois quando incluirmos um novo dado, ele já será incrementado + 1.
+
+numeric(precision, scale)
+poderemos definir a precisão, ou seja, a quantidade de casas decimais que queremos no número.
+
+
+=========================================CAMPOS DE TEXTO=========================================
+
+varchar(n)
+utilizado em 90% dos casos. Ele funciona para textos com um número de caracteres pré-determinado.
+Por exemplo: o nome de uma pessoa teria até, aproximadamente, 255 caracteres, portanto poderíamos caracterizá-lo como varchar;
+
+char(n)
+utilizado quando sabemos exatamente a quantidade de caracteres que será utilizada naquele campo.
+Por exemplo, o campo de CPF sempre vai ter 11 caracteres, então podemos colocá-lo em um campo do tipo char, que já tem o tamanho pré-definido.
+Porém, se foram definidos 11 caracteres para o campo e a pessoa preencheu apenas 9, os dois caracteres restantes serão preenchidos com espaços em branco, e não queremos isso.
+Por isso o este type só deve ser utilizado quando o dado tiver um número exato de caracteres;
+
+text
+utilizado quando não temos ideia de qual será o tamanho do texto, mas ainda queremos armazená-lo no banco de dados.
+
+=========================================CAMPO DE CONDICIONAL=========================================
+
+boolean
+definido para ser verdadeiro ou falso, podendo ser utilizado quando só duas opções são possíveis: ativo ou inativo, se uma ação foi executada ou não e exemplos similares.
+
+=========================================CAMPOS DE TEMPO =========================================
+date
+time
+timestamp
+
+Os campos de data e hora,que são, sucessivamente, do tipo date e do tipo time.
+Assim como temos o campo timestamp que apresenta tanto a data quanto a hora.

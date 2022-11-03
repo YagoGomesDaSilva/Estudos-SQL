@@ -1,0 +1,187 @@
+CREATE TABLE aluno(
+    id SERIAL,
+	nome VARCHAR(255),
+	cpf CHAR(11),
+	observação TEXT,
+	idade INTEGER,
+	dinheiro NUMERIC(10,2),
+	altura REAL,
+	ativo BOOLEAN,
+	data_nascimento DATE,
+	hora_aula TIME,
+	matriculado_em TIMESTAMP
+);
+
+SELECT * FROM aluno;
+
+INSERT INTO aluno (
+    nome,
+    cpf,
+    observação,
+    idade,
+    dinheiro,
+    altura,
+    ativo,
+    data_nascimento,
+    hora_aula,
+    matriculado_em
+) VALUES (
+    'Diogo',
+    '12345678901',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac dui et nisl vestibulum consequat. Integer vitae magna egestas, finibus libero dapibus, maximus magna. Fusce suscipit mi ut dui vestibulum, non vehicula felis fringilla. Vestibulum eget massa blandit, viverra quam non, convallis libero. Morbi ut nunc ligula. Duis tristique purus augue, nec sodales sem scelerisque dignissim. Sed vel rutrum mi. Nunc accumsan magna quis tempus rhoncus. Duis volutpat nulla a aliquet feugiat. Vestibulum rhoncus mi diam, eu consectetur sapien eleifend in. Donec sed facilisis velit. Duis tempus finibus venenatis. Mauris neque nisl, pulvinar eu volutpat eu, laoreet in massa. Quisque vestibulum eros ac tortor facilisis vulputate. Sed iaculis purus non sem tempus mollis. Curabitur felis lectus, aliquam id nunc ut, congue accumsan tellus.',
+    35,
+    100.50,
+    1.81,
+    TRUE,
+    '1984-08-27',
+    '17:30:00',
+    '2020-02-08 12:32:45'
+);
+
+SELECT *
+    FROM aluno
+WHERE id = 1 (evita que haja update em todos os registros do banco. No nosso caso, aplicaremos o "id" como filtro.)
+
+UPDATE aluno
+    SET nome = 'Nico',
+    cpf = '10987654321',
+    observacao = 'Teste',
+    idade = 38,
+    dinheiro = 15.23,
+    altura = 1.90,
+    ativo = FALSE,
+    data_nascimento = '1980-01-15',
+    hora_aula = '13:00:00',
+    matriculado_em = '2020-01-02 15:00:00'
+WHERE id = 1; 
+
+SELECT *
+    FROM aluno 
+    WHERE nome = 'Nico';
+	
+DELETE
+    FROM aluno 
+    WHERE nome = 'Nico';
+
+(criar a tablela diogo novamente)
+(AS usado para apelidar os nomes do campo)
+SELECT nome AS "Nome do Aluno",
+       idade,
+       matriculado_em AS quando_se_matriculou
+    FROM aluno;
+
+=====================FILTROS========================
+
+INSERT INTO aluno (nome) VALUES ('Vinícius Dias');
+INSERT INTO aluno (nome) VALUES ('Nico Steppat');
+INSERT INTO aluno (nome) VALUES ('João Roberto');
+INSERT INTO aluno (nome) VALUES ('Diego');
+
+
+( O igual ( = ) é usado para pesquisar um texto específico)
+SELECT *
+    FROM aluno
+ WHERE nome = 'Diogo';
+
+(O diferente ( != ou <>) é usado quando queremos todos os dados que não declaramos)
+ 
+SELECT *
+    FROM aluno
+ WHERE nome != 'Diogo';
+
+SELECT *
+    FROM aluno
+ WHERE nome <> 'Diogo';
+
+(LIKE pode ser entendido como "parecido com")
+( o (_), que significa "qualquer caractere naquela posição")
+
+SELECT * 
+    FROM aluno
+ WHERE nome LIKE 'Di_go';
+
+(fuciona como um diferente)
+SELECT * 
+    FROM aluno
+ WHERE nome NOT LIKE 'Di_go';
+
+( O % substitui todos os caracteres até o espaço que ele ocupa)
+
+SELECT * 
+    FROM aluno
+ WHERE nome LIKE 'D%';  (começa com D)
+
+SELECT * 
+    FROM aluno
+ WHERE nome LIKE '%s';  (termina com s)
+
+SELECT * 
+    FROM aluno
+ WHERE nome LIKE '% %'; (que tenham espaço)
+
+SELECT * 
+    FROM aluno
+ WHERE nome LIKE '%i%a%'; (O % também pode ser usado entre textos, como %i%a%)
+
+
+( o programa irá retornar todos os registros cujo CPF é nulo)
+SELECT *
+    FROM aluno
+ WHERE cpf IS NULL;
+ 
+(é o comando oposto, ou seja, mostra todos os registros cujo campo selecionado está preenchido)
+ SELECT *
+    FROM aluno
+ WHERE cpf IS NOT NULL;
+ 
+(é possivél tbm se trabalhar com operadores de igualdede , desigualdade e intervalos nos campos que soa numéricos)
+
+
+SELECT *
+    FROM aluno
+ WHERE idade = 35;
+ 
+ SELECT *
+    FROM aluno
+ WHERE idade >= 35;
+ 
+ SELECT *
+    FROM aluno
+ WHERE idade <= 35;
+
+SELECT *
+    FROM aluno
+ WHERE idade > 35;
+ 
+ SELECT *
+    FROM aluno
+ WHERE idade < 35;
+
+(BETWEEN é inclusivo )
+SELECT *
+    FROM aluno
+ WHERE idade BETWEEN 10 AND 40;
+
+
+(campo booleano e operadores logicos)
+SELECT *
+ 	FROM aluno 
+ WHERE ativo = true;
+
+SELECT *
+ 	FROM aluno 
+ WHERE ativo != true;
+
+
+SELECT *
+    FROM aluno
+  WHERE nome LIKE 'D%'
+    AND cpf IS NOT NULL;
+
+SELECT *
+    FROM aluno
+  WHERE nome LIKE 'Diogo'
+    OR nome LIKE 'Rodrigo';
+
+
+

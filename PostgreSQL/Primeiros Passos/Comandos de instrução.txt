@@ -1,0 +1,125 @@
+===============SELECT=================== https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/
+
+Uma das tarefas mais comuns, quando você trabalha com o banco de dados, é consultar dados de tabelas usando a SELECTinstrução.
+
+A SELECTinstrução é uma das instruções mais complexas do PostgreSQL. Ele tem muitas cláusulas que você pode usar para formar uma consulta flexível.
+
+Devido à sua complexidade, vamos dividi-lo em muitos tutoriais mais curtos e fáceis de entender para que você possa aprender sobre cada cláusula mais rapidamente.
+
+A SELECTdeclaração tem as seguintes cláusulas:
+
+Selecione linhas distintas usando o DISTINCT operador.
+Classifique as linhas usando ORDER BY a cláusula.
+Filtre linhas usando WHERE cláusula.
+Selecione um subconjunto de linhas de uma tabela usando a cláusula LIMIT ou .FETCH
+Agrupe linhas em grupos usando a GROUP BY cláusula.
+Filtre grupos usando HAVING cláusula.
+Junte-se a outras tabelas usando junções como cláusulas INNER JOIN, LEFT JOIN, FULL OUTER JOIN, .CROSS JOIN
+Execute as operações de ajuste usando UNION, INTERSECT, e EXCEPT.
+SELECT and .FROM ,especifique o nome da tabela da qual você deseja consultar os dados após a palavra- FROM chave.
+
+===============INSERT=================== https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-insert/
+
+instrução INSERT do PostgreSQL
+A instrução PostgreSQL INSERT permite inserir uma nova linha em uma tabela.
+
+O seguinte ilustra a sintaxe mais básica da INSERT instrução:
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …);
+
+Nesta sintaxe:
+
+Primeiro, especifique o nome da tabela ( table_name) que você deseja inserir dados após as INSERT INTO palavras-chave e uma lista de colunas separadas por vírgula ( colum1, column2, ....).
+Segundo, forneça uma lista de valores separados por vírgulas entre parênteses (value1, value2, ...)após a palavra- VALUES chave. As colunas e valores nas listas de colunas e valores devem estar na mesma ordem.
+
+
+Cláusula RETURNING
+A INSERT instrução também possui uma cláusula opcional RETURNING que retorna as informações da linha inserida.
+
+Se você quiser retornar toda a linha inserida, use um asterisco ( *) após a RETURNING palavra-chave:
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING *;
+
+Se você deseja retornar apenas algumas informações da linha inserida, você pode especificar uma ou mais colunas após a RETURNING cláusula.
+
+Por exemplo, a instrução a seguir retorna o idvalor da linha inserida:
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING id;
+
+Para renomear o valor retornado, use a palavra- AS chave seguida pelo nome da saída. Por exemplo:
+
+INSERT INTO table_name(column1, column2, …)
+VALUES (value1, value2, …)
+RETURNING output_expression AS output_name;
+
+
+
+===============UPDATE=================== https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-update/
+
+
+instrução UPDATE do PostgreSQL
+A instrução PostgreSQL UPDATE permite modificar dados em uma tabela. O seguinte ilustra a sintaxe da UPDATE instrução:
+
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition;
+
+Nesta sintaxe:
+
+Primeiro, especifique o nome da tabela que você deseja atualizar os dados após a palavra- UPDATE chave.
+Segundo, especifique as colunas e seus novos valores após a palavra- SET chave. As colunas que não aparecem na SETcláusula mantêm seus valores originais.
+Terceiro, determine quais linhas atualizar na condição da WHERE cláusula.
+A WHEREcláusula é opcional. Se você omitir a WHERE cláusula, a UPDATEinstrução atualizará todas as linhas da tabela.
+
+Retornando linhas atualizadas
+A UPDATE instrução tem uma cláusula opcional RETURNING que retorna as linhas atualizadas:
+
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2,
+    ...
+WHERE condition
+RETURNING * | output_expression AS output_name;
+
+
+===============DELETE=================== https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-delete/
+
+instrução DELETE do PostgreSQL
+A instrução PostgreSQL DELETE permite excluir uma ou mais linhas de uma tabela.
+
+Veja a seguir a sintaxe básica da DELETE instrução:
+
+DELETE FROM table_name
+WHERE condition;
+
+Nesta sintaxe:
+
+Primeiro, especifique o nome da tabela da qual você deseja excluir os dados após as palavras- DELETE FROMchave.
+Segundo, use uma condição na WHERE cláusula para especificar quais linhas da tabela devem ser excluídas.
+A WHERE cláusula é opcional. Se você omitir a WHEREcláusula, a DELETEinstrução excluirá todas as linhas da tabela.
+
+A DELETE instrução retorna o número de linhas excluídas. Retorna zero se a DELETE instrução não excluiu nenhuma linha.
+
+Para retornar a(s) linha(s) excluída(s) ao cliente, use a RETURNINGcláusula da seguinte forma:
+
+DELETE FROM table_name
+WHERE condition
+RETURNING (select_list | *)
+
+O asterisco ( *) permite retornar todas as colunas da linha excluída do arquivo table_name.
+
+Para retornar colunas específicas, você as especifica após a palavra- RETURNING chave.
+
+Observe que a DELETE instrução remove apenas dados de uma tabela. Não modifica a estrutura da tabela. Se você deseja alterar a estrutura de uma tabela, como remover uma coluna, deve usar a ALTER TABLE instrução.
+
+
+
+
+

@@ -1,0 +1,27 @@
+cardinalidade
+
+Observemos nossa tabela "categoria". Sabemos que vários cursos podem ter a mesma categoria, mas um curso só pode ter uma categoria,
+da forma como codamos no banco de dados. Por isso entendemos que a relação entre categoria e curso é 1:N (um para muitos), ou seja,
+uma categoria pode estar em muitos cursos. Enquanto o relacionamento entre cursos para categoria é N:1 (muitos para um), ou seja, muitos cursos podem estar na mesma categoria.
+Contudo, novamente, um curso só pode ter uma categoria.
+
+Quando falamos em aluno-curso, temos um relacionamento chamado N:N (muitos para muitos),
+o que significa que o mesmo aluno pode estar em vários cursos, ao mesmo tempo em que o mesmo curso pode ter vários alunos.
+Sempre que precisamos desse tipo de relacionamento, ou seja, N:N, precisamos de uma tabela de junção, que é a tabela "aluno_curso".
+Criamos essa tabela unicamente para representar a relação entre cursos e alunos.
+
+Quando temos outros tipos de relacionamento, como 1:N, não precisamos de uma tabela de junção.
+Esse relacionamento é realizado diretamente nas tabelas iniciais, no nosso caso, direto entre curso e categoria, sem precisar de uma tabela "curso_categoria".
+
+Portanto temos relacionamentos 1:N, ou N:1, N:N e, em casos raros, que não implementaremos no nosso banco de dados, é possível ter um tipo de relacionamento **1:1 (um para um).
+
+Por exemplo, imaginem que precisamos das informações de endereço do aluno.
+Então na tabela "aluno" poderíamos colocar campos como "rua", "bairro", "cidade", "numero" e o que mais precisasse, ou poderíamos separar essa informação para deixá-la mais organizada em uma tabela "endereco". Nessa tabela teríamos endereco (rua, bairro, cidade, estado, cep, numero) e quaisquer outros campos que precisássemos, e em "aluno" teríamos apenas o endereco_id.
+
+Poderíamos fazer esse relacionamento, mas um aluno só pode ter um endereço, enquanto um endereço só pode pertencer a um aluno.
+Esse seria um exemplo de relacionamento 1:1. Esse relacionamento é um pouco mais raro e utilizado para organizar o banco de dados.
+Essa situação ocorre quando temos muitas informações na mesma tabela e precisamos separar os dados em tabelas diferentes para algumas otimizações.
+
+Basicamente esses são os principais tipos de relacionamentos: 1:1, 1:N ou N:1 e N:N. Novamente, existem cursos específicos sobre cardinalidade,
+relacionamentos e afins, os cursos de Modelagem de Banco de Dados, inclusive recomendo muito que façam esses cursos,
+mas com esse conhecimento já conseguimos entender o bastante sobre quanto criar cada tipo de relacionamento.
